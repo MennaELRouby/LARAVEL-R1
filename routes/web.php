@@ -90,6 +90,8 @@ Route::post('cardata', function(){
 
 //Route::get('car', [CarController::class,'store']);
 
+Route::get('car', [CarController::class,'store']);
+
 Route::post('cardata', [ExampleController::class,'postData'])->name('cardata');
 
 //show form
