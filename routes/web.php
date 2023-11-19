@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/********Task one*********/
 Route::get('about', function(){
     return 'Welcome to about page';
 });
@@ -57,3 +59,31 @@ Route::prefix('training')->group(function () {
         return 'Welcome to Logistics page';
     });
 });
+/********2nd Session*********/
+Route::fallback(fn() => redirect('/'));
+
+Route::get('cv', function(){
+    return view('Menna El Rouby CV');
+});
+
+Route::get('login', function(){
+    return view('login');
+});
+
+Route::post('logged', function(){
+    return 'Data received';
+})->name('logged');
+
+Route::get('test1', [ExampleController::class,'test1']);
+
+/********2nd Task*********/
+Route::get('addcar', function(){
+    return view('addCar');
+});
+
+Route::post('cardata', function(){
+    return "data received";
+})->name('cardata');
+
+Route::get('addCar', [ExampleController::class,'addCar']);
+Route::post('cardata', [ExampleController::class,'postData']);
