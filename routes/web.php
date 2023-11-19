@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\NewsController;
 
 
 /*
@@ -85,18 +86,23 @@ Route::get('test1', [ExampleController::class,'test1']);
 Route::post('cardata', function(){
     return 'data received';
 })->name('cardata');
+// view add car form
+Route::get('addCar', [ExampleController::class,'addCar']);
 
-//Route::get('addCar', [ExampleController::class,'addCar']);
-
-//Route::get('car', [CarController::class,'store']);
-
+//get data and send to cars database
 Route::get('car', [CarController::class,'store']);
+//show data to other senddata webpage
+Route::post('senddata', [ExampleController::class,'postData'])->name('senddata');
 
-Route::post('cardata', [ExampleController::class,'postData'])->name('cardata');
-
-//show form
+//view Add Carsform
 Route::get('addcar', [CarController::class,'create']);
 
-//send  data in form to database
-Route::post('cardata', [CarController::class,'store'])->name('cardata');
+//send  Cars data in form to Cars database
+Route::post('senddata', [CarController::class,'store'])->name('senddata');
 
+/********4th Task*********/
+//view Add News form
+Route::get('addnews', [NewsController::class,'create']);
+
+//send  News data in form to News database
+Route::post('senddata', [NewsController::class,'store'])->name('senddata');
