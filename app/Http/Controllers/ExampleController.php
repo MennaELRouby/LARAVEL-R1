@@ -28,6 +28,7 @@ public function addCar(){
     echo "\n";
 
     return $request;
+    return "the title is" . $request->title;
  }
 }
 

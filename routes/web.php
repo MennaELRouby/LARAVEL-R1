@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
 
 
 /*
@@ -77,13 +78,23 @@ Route::post('logged', function(){
 Route::get('test1', [ExampleController::class,'test1']);
 
 /********2nd Task*********/
-Route::get('addcar', function(){
-    return view('addCar');
-});
+// Route::get('addcar', function(){
+//     return view('addCar');
+// });
 
 Route::post('cardata', function(){
-    return "data received";
+    return 'data received';
 })->name('cardata');
 
-Route::get('addCar', [ExampleController::class,'addCar']);
-Route::post('cardata', [ExampleController::class,'postData']);
+//Route::get('addCar', [ExampleController::class,'addCar']);
+
+//Route::get('car', [CarController::class,'store']);
+
+Route::post('cardata', [ExampleController::class,'postData'])->name('cardata');
+
+//show form
+Route::get('addcar', [CarController::class,'create']);
+
+//send  data in form to database
+Route::post('cardata', [CarController::class,'store'])->name('cardata');
+
