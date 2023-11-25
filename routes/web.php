@@ -62,7 +62,7 @@ Route::prefix('training')->group(function () {
     });
 });
 /********2nd Session*********/
-Route::fallback(fn() => redirect('/'));
+//Route::fallback(fn() => redirect('/'));
 
 Route::get('cv', function(){
     return view('Menna El Rouby CV');
@@ -86,19 +86,24 @@ Route::get('test1', [ExampleController::class,'test1']);
 Route::post('cardata', function(){
     return 'data received';
 })->name('cardata');
-// view add car form
+/*// view add car form old version*********
 Route::get('addCar', [ExampleController::class,'addCar']);
-
-//get data and send to cars database
-Route::get('car', [CarController::class,'store']);
 //show data to other senddata webpage
-Route::post('senddata', [ExampleController::class,'postData'])->name('senddata');
+Route::post('car', [ExampleController::class,'postData'])->name('cardata');
+******/
 
+/******static entry to send  Cars data from car form to Car database***************/
 //view Add Carsform
 Route::get('addcar', [CarController::class,'create']);
+//static entry to send  Cars data from car form to Car database
+Route::post('car', [CarController::class,'store'])->name('car');
 
-//send  Cars data in form to Cars database
-Route::post('senddata', [CarController::class,'store'])->name('senddata');
+
+//Dynamic entry of car data from car form to car database
+// Route::controller(CarController::class)->group(function(){
+//     Route::get('addcar','create');
+//     Route::post('car','store')->name('car');
+// });
 
 /********4th Task*********/
 //view Add News form
@@ -106,3 +111,15 @@ Route::get('addnews', [NewsController::class,'create']);
 
 //send  News data in form to News database
 Route::post('senddata', [NewsController::class,'store'])->name('senddata');
+
+/**********5th session *************/
+//show car list from db to cars webpage table
+Route::get('cars', [CarController::class,'index']);
+
+// display id value for car row in edit page url
+Route::get('/editCars/{id}', [CarController::class,'edit']);
+
+// put data from db to edit car element form
+Route::put('/updateCars/{id}', [CarController::class,'update'])->name('updatecar');
+
+
