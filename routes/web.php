@@ -122,4 +122,13 @@ Route::get('/editCars/{id}', [CarController::class,'edit']);
 // put data from db to edit car element form
 Route::put('/updateCars/{id}', [CarController::class,'update'])->name('updatecar');
 
+/***********5th Task************* */
+//show car list from db to cars webpage table
+Route::get('news', [NewsController::class,'index']);
+
+// display id value for car row in edit page url
+Route::get('/editNews/{id}', [NewsController::class,'edit']);
+
+// put data from db to edit car element form
+Route::put('/updateNews/{id}', [NewsController::class,'update'])->name('updatenews');
 

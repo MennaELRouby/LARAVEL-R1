@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\News;
 
@@ -12,7 +10,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::get();
+        return view('news',compact('news'));
     }
 
     /**
@@ -55,7 +54,9 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $unews = News::findOrFail($id);
+        return view('updateNews', compact('unews'));
+       //return 'this id is: '. $id;
     }
 
     /**
@@ -63,7 +64,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return view("updateNews");
     }
 
     /**
