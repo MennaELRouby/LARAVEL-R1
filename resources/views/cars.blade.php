@@ -35,7 +35,7 @@
                <td class="lalign">{{$data->title }}</td>
                <td>{{$data->price }}</td>
                <td>{{$data->content }}</td>
-               <td>{{$data->published? 'YES❎' : 'NO ❎'}} </td>
+               <td>{{$data->published? 'YES✅' : 'NO ❎'}} </td>
                <td><a href="editCars/{{$data->id}}">Edit</a></td>
                <td><a href="showCar/{{ $data->id }}">Show</a></td>
                <td><a href="deleteCar/{{ $data->id }}">Delete 🚮</a></td>

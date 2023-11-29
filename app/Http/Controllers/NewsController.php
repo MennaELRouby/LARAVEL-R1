@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\News;
 
 class NewsController extends Controller
 {
+    private $columns = ['title', 'author', 'content', 'published'];
     /**
      * Display a listing of the resource.
      */
@@ -46,7 +48,8 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $snews = News::findOrFail($id);
+        return view('detailsnews', compact('snews'));
     }
 
     /**
@@ -64,7 +67,11 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return view("updateNews");
+        $data['published'] = isset($data['pub'])? true:false;
+        $data = $request->only($this->columns);
+        News::where('id', $id)->update($data);
+       // return view("updateNews");
+        return 'updated';
     }
 
     /**
@@ -72,6 +79,7 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        News::where('id',$id)->delete();
+        return 'deleted page';
     }
 }

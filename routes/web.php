@@ -139,3 +139,11 @@ Route::put('/detailsCar/{id}', [CarController::class,'update'])->name('detailsca
 
 Route::get('/deleteCar/{id}', [CarController::class,'destroy']);
 
+/********6th Task ***************** */
+Route::get('/showNews/{id}', [NewsController::class,'show']);
+
+Route::put('/detailsnews/{id}', [NewsController::class,'update'])->name('detailsnews');
+
+Route::get('/deleteNews/{id}', [NewsController::class,'destroy']);
+
+

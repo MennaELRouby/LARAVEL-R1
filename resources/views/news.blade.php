@@ -21,6 +21,8 @@
                <th><span>Content</span></th>
                <th><span>Published</span></th>
                <th><span>Edit News</span></th>
+               <th><span>News details</span></th>
+               <th><span>Delete News</span></th>
 
              </tr>
            </thead>
@@ -31,8 +33,10 @@
                <td class="lalign">{{$data->title }}</td>
                <td>{{$data->author }}</td>
                <td>{{$data->content }}</td>
-               <td>{{$data->published? 'YES 👌' : 'NO 🤞'}} </td>
+               <td>{{$data->published? 'YES✅' : 'NO ❎'}} </td>
                <td><a href="editNews/{{$data->id}}">Edit</a></td>
+               <td><a href="showNews/{{ $data->id }}">Show</a></td>
+               <td><a href="deleteNews/{{ $data->id }}">Delete 🚮</a></td>
              </tr>
              @endforeach
            </tbody>

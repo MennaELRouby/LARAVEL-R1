@@ -6,7 +6,7 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
-    private $columns = ['title', 'price', 'content'];
+    private $columns = ['title', 'price', 'content', 'published'];
 
     /**
      * Display a listing of the resource.
@@ -74,14 +74,12 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $request->only($this->columns);
         $data['published'] = isset($data['pub'])? true:false;
+        $data = $request->only($this->columns);
         Car::where('id', $id)->update($data);
-        return redirect('id');
-       // return 'updated';
-        //return view("updateCars");
-
-        
+        // return redirect('id');
+       return 'updated';
+        //return view("updateCars");   
     }
 
     /**
