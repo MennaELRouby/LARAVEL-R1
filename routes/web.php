@@ -114,7 +114,7 @@ Route::post('senddata', [NewsController::class,'store'])->name('senddata');
 
 /**********5th session *************/
 //show car list from db to cars webpage table
-Route::get('cars', [CarController::class,'index']);
+Route::get('cars', [CarController::class,'index'])->name('cars');
 
 // display id value for car row in edit page url
 Route::get('/editCars/{id}', [CarController::class,'edit']);
@@ -131,4 +131,11 @@ Route::get('/editNews/{id}', [NewsController::class,'edit']);
 
 // put data from db to edit car element form
 Route::put('/updateNews/{id}', [NewsController::class,'update'])->name('updatenews');
+
+/********6th sesstion ***************** */
+Route::get('/showCar/{id}', [CarController::class,'show']);
+
+Route::put('/detailsCar/{id}', [CarController::class,'update'])->name('detailscar');
+
+Route::get('/deleteCar/{id}', [CarController::class,'destroy']);
 

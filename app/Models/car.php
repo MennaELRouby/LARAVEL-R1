@@ -11,7 +11,6 @@ class car extends Model
     protected $fillable = [
         'title',
         'price',
-        'content',
-        'published'
+        'content'
     ];
 }

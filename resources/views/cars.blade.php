@@ -21,6 +21,10 @@
                <th><span>Model</span></th>
                <th><span>Published</span></th>
                <th><span>Edit Car</span></th>
+               <th><span>Car details</span></th>
+               <th><span>Delete Car </span></th>
+
+
 
              </tr>
            </thead>
@@ -31,8 +35,10 @@
                <td class="lalign">{{$data->title }}</td>
                <td>{{$data->price }}</td>
                <td>{{$data->content }}</td>
-               <td>{{$data->published? 'YES 👌' : 'NO 🤞'}} </td>
+               <td>{{$data->published? 'YES❎' : 'NO ❎'}} </td>
                <td><a href="editCars/{{$data->id}}">Edit</a></td>
+               <td><a href="showCar/{{ $data->id }}">Show</a></td>
+               <td><a href="deleteCar/{{ $data->id }}">Delete 🚮</a></td>
              </tr>
              @endforeach
            </tbody>

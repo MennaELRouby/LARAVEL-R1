@@ -11,27 +11,23 @@
 <body>
 
 <div class="container">
-  <h2>Edit Car</h2>
-  <form action="{{route('updatecar',[$ucar->id])}}" method="post">
-  @csrf
-  @method('put')
+  <h2>Show Car Details</h2>
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ $ucar->title }}">
+      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ $scar->title }}">
     </div>
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{ $ucar->price }}">
+      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{ $scar->price }}">
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description" name="content">{{ $ucar->content }}"</textarea>
+        <textarea class="form-control" rows="5" id="description" name="content">{{ $scar->content }}"</textarea>
       </div> 
     <div class="checkbox">
-      <label><input type="checkbox" name="pub" @checked($ucar->published)> Published</label>
-      <!-- {{$ucar->published? 'checked' : ''}} -->
+      <label><input type="checkbox" name="pub" @checked($scar->published)> Published</label>
+     
     </div>
-    <button type="submit" class="btn btn-default">Add</button>
   </form>
 </div>
 

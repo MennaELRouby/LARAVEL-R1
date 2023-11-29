@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>Add Car</h2>
-  <form action="{{route('car')}}" method="post">
+  <form action="{{route('cars')}}" method="post">
   @csrf
     <div class="form-group">
       <label for="title">Title:</label>

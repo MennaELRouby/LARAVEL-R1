@@ -6,7 +6,7 @@ use App\Models\Car;
 
 class CarController extends Controller
 {
-    private $columns = ['title', 'price', 'content', 'published'];
+    private $columns = ['title', 'price', 'content'];
 
     /**
      * Display a listing of the resource.
@@ -28,9 +28,9 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        $car= new car;
+        /***$car= new car;
         // $car->title="BMW";
         // $car->price="300";
         // $car->content="good";
@@ -46,7 +46,7 @@ class CarController extends Controller
             $car->published=0;
         }  
         $car->save();
-        return "car data added";
+        return "car data added";****/
     }
 
     /**
@@ -54,7 +54,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $scar = Car::findOrFail($id);
+        return view('detailsCar', compact('scar'));
     }
 
     /**
@@ -73,7 +74,12 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return view("updateCars");
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['pub'])? true:false;
+        Car::where('id', $id)->update($data);
+        return redirect('id');
+       // return 'updated';
+        //return view("updateCars");
 
         
     }
@@ -83,6 +89,7 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Car::where('id',$id)->delete();
+        return 'deleted page';
     }
 }
