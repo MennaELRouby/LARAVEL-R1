@@ -151,6 +151,11 @@ Route::get('trashedcar', [CarController::class,'trashed']);
 Route::get('restoreCar/{id}', [CarController::class,'restore']);
 Route::get('deleteCar/{id}', [CarController::class,'delete']);
 
+/********7th task ***************** */
+Route::get('trashednews', [NewsController::class,'trashed']);
+Route::get('restorenews/{id}', [NewsController::class,'restore']);
+Route::get('deletenews/{id}', [NewsController::class,'delete']);
+
 
 
 

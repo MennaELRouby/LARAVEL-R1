@@ -29,18 +29,24 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $news = new News;
-        $news->title=$request->title;
-        $news->author=$request->author;
-        $news->content=$request->content;
-        if(isset($request->pub)){
-            $news->published=1;
-        }
-        else{
-            $news->published=0;
-        }  
-        $news->save();
-        return "News data added";
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? true : false;
+        $request->validate([
+            'title'=>'required|string|max:50',
+            'content'=>'required|string',
+        ]);
+        // $news = new News;
+        // $news->title=$request->title;
+        // $news->author=$request->author;
+        // $news->content=$request->content;
+        // if(isset($request->pub)){
+        //     $news->published=1;
+        // }
+        // else{
+        //     $news->published=0;
+        // }  
+        // $news->save();
+        // return "News data added";
     }
 
     /**
@@ -77,9 +83,25 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
         News::where('id',$id)->delete();
-        return 'deleted page';
+        return redirect('news');
+    }
+    public function trashed(){
+        $news = News::onlyTrashed()->get();
+        return view('trashednews', compact('news'));
+    }
+
+    public function restore(string $id):RedirectResponse
+    {
+        News::where('id',$id)->restore();
+        return redirect('news');
+    }
+
+    public function delete(string $id):RedirectResponse
+    {
+        News::where('id',$id)->forceDelete();
+        return redirect('news');
     }
 }
