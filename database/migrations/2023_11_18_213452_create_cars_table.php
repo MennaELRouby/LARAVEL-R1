@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('price',100);
             $table->text('content',1000);
             $table->boolean('published');
+            $table->softDeletes();
         });
     }
 

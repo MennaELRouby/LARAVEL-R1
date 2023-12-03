@@ -146,4 +146,11 @@ Route::put('/detailsnews/{id}', [NewsController::class,'update'])->name('details
 
 Route::get('/deleteNews/{id}', [NewsController::class,'destroy']);
 
+/********7th session ***************** */
+Route::get('trashedcar', [CarController::class,'trashed']);
+Route::get('restoreCar/{id}', [CarController::class,'restore']);
+Route::get('deleteCar/{id}', [CarController::class,'delete']);
+
+
+
 

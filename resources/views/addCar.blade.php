@@ -12,7 +12,7 @@
 
 <div class="container">
   <h2>Add Car</h2>
-  <form action="{{route('cars')}}" method="post">
+  <form action="{{route('car')}}" method="post">
   @csrf
     <div class="form-group">
       <label for="title">Title:</label>
@@ -27,7 +27,7 @@
         <textarea class="form-control" rows="5" id="description" name="content"></textarea>
       </div> 
     <div class="checkbox">
-      <label><input type="checkbox" name="pub"> Published</label>
+      <label><input type="checkbox" name="published"> Published</label>
     </div>
     <button type="submit" class="btn btn-default">Add</button>
   </form>

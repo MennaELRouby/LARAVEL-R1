@@ -28,25 +28,32 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):RedirectResponse
+    public function store(Request $request)
     {
-        /***$car= new car;
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? true : false;
+        $request->validate([
+            'title'=>'required|string|max:50',
+            'content'=>'required|string',
+        ]);
+        Car::create($data);
+        //$car= new car;
         // $car->title="BMW";
         // $car->price="300";
         // $car->content="good";
         // $car->published=true;
-        $car->title=$request->title;
-        $car->price=$request->price;
-        $car->content=$request->content;
+      //  $car->title=$request->title;
+        //$car->price=$request->price;
+       // $car->content=$request->content;
         //$pub=$request->pub;
-        if(isset($request->pub)){
-            $car->published=1;
-        }
-        else{
-            $car->published=0;
-        }  
-        $car->save();
-        return "car data added";****/
+       // if(isset($request->pub)){
+         //   $car->published=1;
+      //  }
+       // else{
+            //$car->published=0;
+       // }  
+       // $car->save();
+        return "car data added";
     }
 
     /**
@@ -85,9 +92,25 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
         Car::where('id',$id)->delete();
-        return 'deleted page';
+        return redirect('cars');
+    }
+    public function trashed(){
+        $cars = Car::onlyTrashed()->get();
+        return view('trashedcar', compact('cars'));
+    }
+
+    public function restore(string $id):RedirectResponse
+    {
+        Car::where('id',$id)->restore();
+        return redirect('cars');
+    }
+
+    public function delete(string $id):RedirectResponse
+    {
+        Car::where('id',$id)->forceDelete();
+        return redirect('cars');
     }
 }
