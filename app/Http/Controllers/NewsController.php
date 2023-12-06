@@ -30,7 +30,7 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
         $messages=[
             'title.required'=>'Title is required',
@@ -46,6 +46,8 @@ class NewsController extends Controller
         $fileName = $this->uploadFile($request->image, 'assets/images');
         $data['image']= $fileName;
         $data['published'] = isset($request['published']);
+        News::create($data);
+        return redirect('news');
         // $news = new News;
         // $news->title=$request->title;
         // $news->author=$request->author;
