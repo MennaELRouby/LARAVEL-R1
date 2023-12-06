@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\Common; 
+
 
 class ExampleController extends Controller
 {

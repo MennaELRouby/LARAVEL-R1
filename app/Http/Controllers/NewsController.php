@@ -3,9 +3,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\News;
+use App\Traits\Common; 
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
 class NewsController extends Controller
 {
+    use Common;
     private $columns = ['title', 'author', 'content', 'published'];
     /**
      * Display a listing of the resource.
@@ -29,12 +32,20 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $messages=[
+            'title.required'=>'Title is required',
+             'content.required'=> 'content is required'
+        ];
         $data = $request->only($this->columns);
         $data['published'] = isset($data['published'])? true : false;
         $request->validate([
             'title'=>'required|string|max:50',
             'content'=>'required|string',
-        ]);
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ],$messages);
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+        $data['image']= $fileName;
+        $data['published'] = isset($request['published']);
         // $news = new News;
         // $news->title=$request->title;
         // $news->author=$request->author;
