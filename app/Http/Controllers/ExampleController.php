@@ -30,5 +30,15 @@ public function addCar(){
     return $request;
     return "the title is" . $request->title;
  }
+ public function showUpload(){
+    return view('upload');
 }
+
+public function upload(Request $request){
+ 
+    $h = $this->uploadFile($request->image, 'assets/images');
+    return $h;
+}
+}
+
 

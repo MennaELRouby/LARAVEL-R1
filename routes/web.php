@@ -157,5 +157,8 @@ Route::get('restorenews/{id}', [NewsController::class,'restore']);
 Route::get('deletenews/{id}', [NewsController::class,'delete']);
 
 
+/********8th task ***************** */
 
+Route::get('showUpload',[ExampleController::class, 'showUpload']);
 
+Route::post('upload',[ExampleController::class, 'upload'])->name('upload');

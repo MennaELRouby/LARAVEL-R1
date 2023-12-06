@@ -3,9 +3,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Traits\Common; 
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
+
 
 class CarController extends Controller
 {
+    use Common;
     private $columns = ['title', 'price', 'content', 'published'];
 
     /**
@@ -28,15 +32,26 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true : false;
+        $messages=[
+            'title.required'=>'Title is required',
+             'content.required'=> 'content is required'
+        ];
+     $data = $request->only($this->columns);
+    $data['published'] = isset($data['published']);
         $request->validate([
             'title'=>'required|string|max:50',
             'content'=>'required|string',
-        ]);
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+        $data['image']= $fileName;
+        $data['published'] = isset($request['published']);
         Car::create($data);
+        return redirect('cars');
+        //return dd($data);
+
         //$car= new car;
         // $car->title="BMW";
         // $car->price="300";
@@ -53,7 +68,6 @@ class CarController extends Controller
             //$car->published=0;
        // }  
        // $car->save();
-        return "car data added";
     }
 
     /**
