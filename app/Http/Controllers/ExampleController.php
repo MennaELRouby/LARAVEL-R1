@@ -8,6 +8,7 @@ use App\Traits\Common;
 
 class ExampleController extends Controller
 {
+    use Common;
     public function test1(){
 return view("login");
 }
@@ -38,9 +39,16 @@ public function addCar(){
 
 public function upload(Request $request){
  
-    $h = $this->uploadFile($request->image, 'assets/images');
+    $h = $this->uploadFile($request->image, 'assets/img');
     return $h;
 }
+public function place(){
+    return view('place');
+}
+public function blog(){
+    return view('blog');
+}
+
 }
 
 

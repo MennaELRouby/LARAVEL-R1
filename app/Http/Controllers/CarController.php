@@ -34,23 +34,20 @@ class CarController extends Controller
      */
     public function store(Request $request):RedirectResponse
     {
-        $messages=[
-            'title.required'=>'Title is required',
-             'content.required'=> 'content is required'
-        ];
-     $data = $request->only($this->columns);
-    $data['published'] = isset($data['published']);
+        $messages=$this->messages();
+        $data = $request->only($this->columns);
         $request->validate([
             'title'=>'required|string|max:50',
             'content'=>'required|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ], $messages);
+
         $fileName = $this->uploadFile($request->image, 'assets/images');
         $data['image']= $fileName;
         $data['published'] = isset($request['published']);
-        Car::create($data);
-        return redirect('cars');
-        //return dd($data);
+       Car::create($data);
+       return redirect('cars');
+       // return dd($data);
 
         //$car= new car;
         // $car->title="BMW";
@@ -95,11 +92,23 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data['published'] = isset($data['pub'])? true:false;
-        $data = $request->only($this->columns);
-        Car::where('id', $id)->update($data);
+        //$data['published'] = isset($request['pub'])? true:false;
+        $messages = $this->messages();
+        //$data = $request->only($this->columns);
+        $data=$request->validate([
+            'title'=>'required|string|max:50',
+            'content'=>'required|string',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+        $data['published'] = isset($request['published']);
+        if($request->hasFile('image')){
+            $fileName = $this->uploadFile($request->image, 'assets/img');
+            $data['image']= $fileName;
+        }
+//return dd($data);
+Car::where('id', $id)->update($data);
         // return redirect('id');
-       return 'updated';
+return 'updated';
         //return view("updateCars");   
     }
 
@@ -126,5 +135,13 @@ class CarController extends Controller
     {
         Car::where('id',$id)->forceDelete();
         return redirect('cars');
+    }
+
+    public function messages(){
+        return [
+            'title.required'=>'Title is required',
+             'content.required'=> 'content is required'
+        ];
+
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\PlaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,3 +162,14 @@ Route::get('deletenews/{id}', [NewsController::class,'delete']);
 Route::get('showUpload',[ExampleController::class, 'showUpload']);
 
 Route::post('upload',[ExampleController::class, 'upload'])->name('upload');
+
+/***********9th session**************** */
+Route::get('place',[ExampleController::class, 'place']);
+Route::get('blog',[ExampleController::class, 'blog']);
+Route::get('blog1',[ExampleController::class, 'blog1']);
+
+/**************9th task ********************** */
+Route::get('addplace', [PlaceController::class,'create']);
+Route::post('place', [PlaceController::class,'store'])->name('place');
+Route::get('place', [PlaceController::class,'index']);
+

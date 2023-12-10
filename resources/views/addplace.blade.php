@@ -11,8 +11,8 @@
 <body>
 
 <div class="container">
-  <h2>Add Car</h2>
-  <form action="{{route('car')}}" method="post" enctype="multipart/form-data">
+  <h2>Add place</h2>
+  <form action="{{route('place')}}" method="post" enctype="multipart/form-data">
   @csrf
     <div class="form-group">
       <label for="title">Title:</label>
@@ -24,8 +24,16 @@
              @enderror
     </div>
     <div class="form-group">
-      <label for="price">Price:</label>
-      <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{old('price')}}">
+      <label for="typeplace">Type of place:</label>
+      <input type="text" class="form-control" id="title" placeholder="Enter type" name="type" value="{{old('type')}}">
+</div>
+    <div class="form-group">
+      <label for="price">fromPrice:</label>
+      <input type="text" class="form-control" id="price" placeholder="Enter from Price" name="fprice" value="{{old('fprice')}}">
+    </div>
+    <div class="form-group">
+      <label for="price">To Price:</label>
+      <input type="text" class="form-control" id="price" placeholder="Enter to Price" name="toprice" value="{{old('toprice')}}">
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
@@ -43,9 +51,6 @@
                 {{ $message }}
             @enderror
         </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="published"> Published</label>
-    </div>
     <button type="submit" class="btn btn-default">Add</button>
   </form>
 </div>
