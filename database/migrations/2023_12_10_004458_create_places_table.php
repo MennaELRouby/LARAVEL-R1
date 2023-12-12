@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('toprice',100);
             $table->text('content',1000);
             $table->string('image', 100);
+            $table->softDeletes();
+
         });
     }
 

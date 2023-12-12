@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Place;
+use Illuminate\Http\RedirectResponse;
 use App\Traits\Common; 
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
@@ -15,9 +16,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
         $place = Place::get();
-        return view('place', compact('place'));
+        return view('placestable', compact('place'));
     }
 
     /**
@@ -75,8 +75,9 @@ class PlaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
-        //
+        Place::where('id',$id)->delete();
+        return redirect('placestable');
     }
 }

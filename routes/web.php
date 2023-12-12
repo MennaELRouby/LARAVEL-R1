@@ -171,5 +171,7 @@ Route::get('blog1',[ExampleController::class, 'blog1']);
 /**************9th task ********************** */
 Route::get('addplace', [PlaceController::class,'create']);
 Route::post('place', [PlaceController::class,'store'])->name('place');
-Route::get('place', [PlaceController::class,'index']);
 
+/***************10th task************************* */
+Route::get('placestable', [PlaceController::class,'index']);
+Route::get('/deletePlace/{id}', [PlaceController::class,'destroy']);
