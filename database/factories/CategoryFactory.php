@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Provider\Fakecar;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category.php>
  */
-class CarFactory extends Factory
+
+class CategoryFactory extends Factory
 {
+
     /**
      * Define the model's default state.
      *
@@ -19,12 +22,7 @@ class CarFactory extends Factory
         $faker = (new \Faker\Factory())::create();
         $faker->addProvider(new \Faker\Provider\Fakecar($faker));
         return [
-            'title' => $faker->vehicle,
-            'price' => fake()->numberBetween(100000, 500000),
-            'content' => $faker->vehicleType,
-            'published' => 1,
-            'image' => fake()->imageUrl(800, 600),
-            'cat_id' => fake()->numberBetween(101, 110)
+            'cat_name' => $faker->vehicleBrand
         ];
     }
 }

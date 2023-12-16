@@ -9,13 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class car extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
         'price',
         'content',
+        'published',
         'image',
-        'published'
-        
+        'cat_id'
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'cat_id');
+    }
 }

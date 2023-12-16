@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Edit Car</title>
   <meta charset="utf-8">
@@ -8,10 +9,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Show Car Details</h2>
+  <div class="container">
+    <h2>Show Car Details</h2>
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ $scar->title }}">
@@ -21,15 +23,20 @@
       <input type="text" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{ $scar->price }}">
     </div>
     <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description" name="content">{{ $scar->content }}"</textarea>
-      </div> 
+      <label for="description">Description:</label>
+      <textarea class="form-control" rows="5" id="description" name="content">{{ $scar->content }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="description">Category:</label>
+      <textarea class="form-control" rows="5" id="description" name="content">{{$scar->category?->cat_name}}</textarea>
+    </div>
     <div class="checkbox">
       <label><input type="checkbox" name="pub" @checked($scar->published)> Published</label>
-     
+
     </div>
-  </form>
-</div>
+    </form>
+  </div>
 
 </body>
+
 </html>
