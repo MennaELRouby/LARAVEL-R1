@@ -6,7 +6,8 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PlaceController;
-use App\Http\Controllers\ContactControllerController;
+use App\Http\Controllers\HomeController;
+
 
 
 /*
@@ -182,3 +183,7 @@ Route::get('/deletePlace/{id}', [PlaceController::class, 'destroy']);
 /*******************12th task************************* */
 Route::get('contact', [ContactController::class, 'create']);
 Route::post('contact', [ContactController::class, 'send'])->name('messagesent');
+
+Auth::routes(['verify' => true]);;
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
