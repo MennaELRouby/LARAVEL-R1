@@ -34,7 +34,7 @@
         <select name="cat_id">
           <option value="">Select Category</option>
           @foreach($category as $data)
-          <option value="{{$data->id}}">{{$data->cat_name}}</option>
+          <option value="{{$data->id}}" @selected($data?->cat_name==$ucar->category?->cat_name)>{{$data->cat_name}}</option>
           @endforeach
 
         </select>
