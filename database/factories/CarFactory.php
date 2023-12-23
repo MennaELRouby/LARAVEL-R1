@@ -24,7 +24,7 @@ class CarFactory extends Factory
             'content' => $faker->vehicleType,
             'published' => 1,
             'image' => fake()->imageUrl(800, 600),
-            'cat_id' => fake()->numberBetween(101, 110)
+            'cat_id' => fake()->numberBetween(1, 10)
         ];
     }
 }

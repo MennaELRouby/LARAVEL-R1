@@ -118,7 +118,7 @@ Route::post('senddata', [NewsController::class, 'store'])->name('senddata');
 
 /**********5th session *************/
 //show car list from db to cars webpage table
-Route::get('cars', [CarController::class, 'index'])->name('cars');
+Route::get('cars', [CarController::class, 'index'])->name('cars')->middleware('verified');
 
 // display id value for car row in edit page url
 Route::get('/editCars/{id}', [CarController::class, 'edit']);
@@ -187,3 +187,6 @@ Route::post('contact', [ContactController::class, 'send'])->name('messagesent');
 Auth::routes(['verify' => true]);;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/******************13th task*************** */
+Route::get('session', [ExampleController::class, 'mySession']);
