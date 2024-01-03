@@ -190,3 +190,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /******************13th task*************** */
 Route::get('session', [ExampleController::class, 'mySession']);
+
+/*******************14th task *********************** */
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Route::get('addcar', [CarController::class, 'create']);
+        Route::post('car', [CarController::class, 'store'])->name('car');
+    }
+);

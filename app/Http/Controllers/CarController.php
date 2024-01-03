@@ -43,7 +43,7 @@ class CarController extends Controller
             'title' => 'required|string|max:50',
             'content' => 'required|string',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
-            'cat_id' => 'required'
+            'cat_id' => 'required',
         ], $messages);
 
         $fileName = $this->uploadFile($request->image, 'assets/images');
@@ -105,7 +105,8 @@ class CarController extends Controller
         //$data = $request->only($this->columns);
         $data = $request->validate([
             'title' => 'required|string|max:50',
-            'content' => 'required|string',
+            'content' => 'required|string|max:500',
+            'price' => 'required|numeric',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
             'cat_id' => 'required',
         ], $messages);
@@ -150,8 +151,18 @@ class CarController extends Controller
     public function messages()
     {
         return [
-            'title.required' => 'Title is required',
-            'content.required' => 'content is required'
+            // 'title.required' => 'Title is required',
+            // 'content.required' => 'content is required',
+            'title.required'   => __('messages.titleRequiredMsg'),
+            'content.required' => __('messages.contentRequiredMsg'),
+            'content.max' => __('messages.contentMaxMsg'),
+            'price.required' => __('messages.priceRequiredMsg'),
+            'price.numeric' => __('messages.priceNumericMsg'),
+            'image.require'  => __('messages.imageRequiredMsg'),
+            'image.mimes'   => __('messages.imageMimesMsg'),
+            'image.max'  => __('messages.imageSizeMsg'),
+            'cat_id.required'  => __('messages.categoryRequiredMsg'),
+
         ];
     }
 }
