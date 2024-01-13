@@ -7,8 +7,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\HomeController;
-
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Jobs\ProcessPodcast;
 
 /*
 |--------------------------------------------------------------------------
@@ -202,3 +202,18 @@ Route::group(
         Route::post('car', [CarController::class, 'store'])->name('car');
     }
 );
+
+/********************************15TH TASK************************* */
+
+Route::get('auth/redirect', function () {
+    return Socialite::driver('facebook')->redirect();
+})->name('facebook');
+
+Route::get('auth/callback', function () {
+    $user = Socialite::driver('facebook')->user();
+})->name('userdata');
+
+Route::get('/', function () {
+    ProcessPodcast::dispatch();
+    return view('welcome');
+});
